@@ -1,13 +1,12 @@
-import { fethApi } from './utils/Api'
 import './App.css'
 import { useEffect } from 'react'
-
+import { fetchApi } from './utils/Api'
 function App() {
   useEffect(()=>{
 api()
   },[])
   const api = ()=>{
-    fethApi("/movie/popular")
+    fetchApi("/movie/popular")
     .then((res)=>{
       console.log(res);
     })
