@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import "./HeroBanner.scss"
 import { useNavigate } from "react-router-dom";
 import Usefeth from "../../../hooks/UseFetch";
 import { useSelector } from "react-redux";
+import Image from "../../../components/lazyloading.jsx/Image";
+import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 
 const HeroBanner = () => {
   const [Background, setBackground] = useState("");
@@ -24,22 +27,32 @@ const HeroBanner = () => {
   };
   return (
     <div>
-      <div className="heroBanner">
-        <div className="wrapper">
-          <div className="heroBannerContent">
-            <span className="title">Welcome.</span>
-            <span className="subtitle">Lorem ipsum dolor sit amet.</span>
-            <div className="searchInput">
-              <input
-                type="text"
-                placeholder="Search movies and tv shows"
-                onKeyUp={searchQuaryHandler}
-                onClick={(e) => setQuary(e.target.value)}
-              />
-              <button>Search</button>
+      <div className="heroBanner" id="hellow">
+        {!loading && (
+          <div className="backdrop-img">
+            <Image src={Background} />
+          </div>
+        )}
+        <div className="opacity-layer">
+
+        </div>
+        <ContentWrapper>
+          <div className="wrapper">
+            <div className="heroBannerContent">
+              <span className="title">Welcome.</span>
+              <span className="subtitle">Lorem ipsum dolor sit amet.</span>
+              <div className="searchInput">
+                <input
+                  type="text"
+                  placeholder="Search movies and tv shows"
+                  onKeyUp={searchQuaryHandler}
+                  onClick={(e) => setQuary(e.target.value)}
+                />
+                <button>Search</button>
+              </div>
             </div>
           </div>
-        </div>
+        </ContentWrapper>
       </div>
     </div>
   );
