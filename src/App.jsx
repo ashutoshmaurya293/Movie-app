@@ -1,6 +1,6 @@
 import './App.css'
 import { useEffect } from 'react'
-import { fetchApi } from './utils/Api'
+import { fetchApi } from './utils/Api';
 import { getApiConfeliation } from './Store/HomeSlice'
 import { useDispatch,useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -13,16 +13,21 @@ import Header from './components/Header/Header'
 import Footer from './components/footer/Footer'
 function App() {
   const {url} = useSelector((state)=>state.Home)
-  console.log(url);
+  // console.log(url);
   const dispath = useDispatch()
   useEffect(()=>{
-api()
+    fetchApiConfig()
   },[])
-  const api = ()=>{
-    fetchApi("/movie/popular")
+  const fetchApiConfig = ()=>{
+    fetchApi("/configuration")
     .then((res)=>{
-      // console.log(res);
-      dispath(getApiConfeliation(res))
+      console.log(res);
+      const url = {
+        backdrop:res.images.secure_base_url + "original",
+        poster:res.images.secure_base_url + "original",
+        profile:res.images.secure_base_url + "original"
+      }
+      dispath(getApiConfeliation(url))
     })
   }
 

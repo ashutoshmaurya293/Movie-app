@@ -1,9 +1,27 @@
-import React from 'react'
+import { useEffect, useState } from "react";
+import { fetchApi } from "../utils/Api";
+const Usefeth = (url) => {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(null);
+    const [error, setError] = useState(null);
 
-const UseFetch = () => {
-  return (
-    <div>UseFetch</div>
-  )
-}
+    useEffect(() => {
+        setLoading("loading...");
+        setData(null);
+        setError(null);
 
-export default UseFetch
+        fetchApi(url)
+            .then((res) => {
+                setLoading(false);
+                setData(res);
+            })
+            .catch((err) => {
+                setLoading(false);
+                setError("Something went wrong!");
+            });
+    }, [url]);
+
+    return { data, loading, error };
+};
+
+export default Usefeth;
