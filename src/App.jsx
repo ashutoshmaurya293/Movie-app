@@ -23,7 +23,7 @@ function App() {
     .then((res)=>{
       console.log(res);
       const url = {
-        backdrop:res.images.secure_base_url + "original",
+        backdrop:"https://image.tmdb.org/t/p/original",
         poster:res.images.secure_base_url + "original",
         profile:res.images.secure_base_url + "original"
       }
