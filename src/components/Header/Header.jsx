@@ -17,9 +17,26 @@ const Header = () => {
   const [showSearch, setShowSearch] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const searchQuaryHandler = (e) => {
+    if (e.key === "Enter" && query.length > 0) {
+      navigate(`/search/${query}`);
+      setTimeout(() => {
+        setShowSearch(false)
+      }, 1000);
+    }
+  };
+const openSearch = ()=>{
+  setMobileMenu(false)
+  setShowSearch(true)
+}
+
+const openMobileMenu = () =>{
+  setMobileMenu(true)
+  setShowSearch(false)
+}
 
   return (
-    <header className="header">
+    <header className={`header ${mobileMenu?"mobileView":""}`}>
       <ContentWrapper>
         <div className="log">
           <img src={logo} alt="" />
@@ -31,7 +48,24 @@ const Header = () => {
             <HiOutlineSearch />
           </li>
         </ul>
+        <div className="mobileMenuItems">
+          <HiOutlineSearch onClick={openSearch}/>
+          {mobileMenu ? <VscChromeClose onClick={()=>setMobileMenu(false)}/> : <SlMenu onClick={openMobileMenu}/>}
+        </div>
       </ContentWrapper>
+     {showSearch && <div className="searchBar">
+        <ContentWrapper>
+        <div className="searchInput">
+                <input
+                  type="text"
+                  placeholder="Search movies and tv shows"
+                  onKeyUp={searchQuaryHandler}
+                  onClick={(e) => setQuery(e.target.value)}
+                />
+                <VscChromeClose onClick={()=>setShowSearch(false)}/>
+              </div>
+        </ContentWrapper>
+      </div>}
     </header>
   );
 };

@@ -8,7 +8,7 @@ import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 
 const HeroBanner = () => {
   const [Background, setBackground] = useState("");
-  const [Quary, setQuary] = useState("");
+  const [query, setQuary] = useState("");
   const navgate = useNavigate();
   const { data, loading } = Usefeth("/movie/upcoming");
   const { url } = useSelector((state) => state.Home);
@@ -21,8 +21,8 @@ const HeroBanner = () => {
   }, [data]);
 
   const searchQuaryHandler = (e) => {
-    if (e.key === "Enter" && Quary.length > 0) {
-      navgate(`/search/${Quary}`);
+    if (e.key === "Enter" && query.length > 0) {
+      navgate(`/search/${query}`);
     }
   };
   return (
