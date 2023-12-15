@@ -9,7 +9,8 @@ const SwitchTab = ({ data, onTabChange }) => {
     setTimeout(() => {
       setSelecated(index);
     }, 300);
-    onTabChange();
+    onTabChange(tab,index);
+    // console.log(tab);
   };
   return (
     <div className="switchingTabs">

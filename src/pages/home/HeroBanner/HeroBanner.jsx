@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import Image from "../../../components/lazyloading/Image";
 
+
 const HeroBanner = () => {
   const [Background, setBackground] = useState("");
   const [query, setQuary] = useState("");
@@ -14,7 +15,7 @@ const HeroBanner = () => {
   const { url } = useSelector((state) => state.Home);
   useEffect(() => {
     const bg =
-      url.backdrop +
+    "https://image.tmdb.org/t/p/original" +
       data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path;
     console.log(bg);
     setBackground(bg);
