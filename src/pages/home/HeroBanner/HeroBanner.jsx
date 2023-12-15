@@ -3,8 +3,8 @@ import "./HeroBanner.scss"
 import { useNavigate } from "react-router-dom";
 import Usefeth from "../../../hooks/UseFetch";
 import { useSelector } from "react-redux";
-import Image from "../../../components/lazyloading.jsx/Image";
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
+import Image from "../../../components/lazyloading/Image";
 
 const HeroBanner = () => {
   const [Background, setBackground] = useState("");

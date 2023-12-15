@@ -16,6 +16,14 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const goHome = () =>{
+navigate("/")
+  }
+
+  useEffect(()=>{
+window.scrollTo(0,0)
+  },[location])
+
   const searchQuaryHandler = (e) => {
     if (e.key === "Enter" && query.length > 0) {
       navigate(`/search/${query}`);
@@ -46,7 +54,7 @@ const Header = () => {
     <header className={`header ${mobileMenu ? "mobileView" : ""} top`}>
       <ContentWrapper>
         <div className="log">
-          <img src={logo} alt="" />
+          <img src={logo} alt=""onClick={goHome} />
         </div>
         <ul className="menuItems">
           <li className="menuItem" onClick={() => navigationHandler("movie")}>

@@ -1,11 +1,12 @@
 import React from 'react'
 import HeroBanner from './HeroBanner/HeroBanner'
+import Trending from './trending/Trending'
 
 const Home = () => {
   return (
     <div>
       <HeroBanner/>
-      <div style={{height:1000}}></div>
+      <Trending/>
     </div>
   )
 }
