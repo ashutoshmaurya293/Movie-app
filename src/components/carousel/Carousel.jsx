@@ -20,6 +20,7 @@ const Carousel = ({ data, loading }) => {
 
   return (
     <div className="carousel">
+      <ContentWrapper>
       <BsFillArrowLeftCircleFill
         className="carouselLeftNav arrow"
         onClick={() => navigation("left")}
@@ -28,13 +29,34 @@ const Carousel = ({ data, loading }) => {
         className="carouselRighttNav arrow"
         onClick={() => navigation("right")}
       />
-      {!loading?(
+      {!loading ? (
         <div className="carouselItems">
-         
+          {data?.map((e) => {
+            // console.log(e);
+            const posterUrl = e.poster_path
+              ? url.poster + e.poster_path
+              : PosterFallback;
+            return (
+              <div className="carouselItem" key={e.id}>
+                <div className="posterBlock">
+                  <Image src={posterUrl} />
+                </div>
+                <div className="textBlock">
+                  <span className="title">
+                    {e.title || e.name}
+                  </span>
+                  <span className="date">
+                   {dayjs(e.first_air_date).format("MMM D, YYYY")}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
-      ):(
+      ) : (
         <span>loading..</span>
       )}
+      </ContentWrapper>
     </div>
   );
 };
