@@ -11,12 +11,27 @@ import ContentWrapper from "../contentWrapper/ContentWrapper";
 import PosterFallback from "../../assets/no-poster.png";
 import "./Carousel.scss";
 import Image from "../lazyloading/Image";
+import CircleRating from "../circleRating/CircleRating";
 
 const Carousel = ({ data, loading }) => {
   const carouselConainer = useRef();
   const { url } = useSelector((state) => state.Home);
+  // console.log(url);
   const navigate = useNavigate();
   const navigation = () => {};
+
+  const skItem = () => {
+    return (
+        <div className="skeletonItem">
+            <div className="posterBlock skeleton"></div>
+            <div className="textBlock">
+                <div className="title skeleton"></div>
+                <div className="date skeleton"></div>
+            </div>
+        </div>
+    );
+};
+
 
   return (
     <div className="carousel">
@@ -32,7 +47,7 @@ const Carousel = ({ data, loading }) => {
       {!loading ? (
         <div className="carouselItems">
           {data?.map((e) => {
-            // console.log(e);
+            console.log(e);
             const posterUrl = e.poster_path
               ? url.poster + e.poster_path
               : PosterFallback;
@@ -40,6 +55,7 @@ const Carousel = ({ data, loading }) => {
               <div className="carouselItem" key={e.id}>
                 <div className="posterBlock">
                   <Image src={posterUrl} />
+                  <CircleRating rating={e.vote_average.toFixed(1)}/>
                 </div>
                 <div className="textBlock">
                   <span className="title">
@@ -54,7 +70,13 @@ const Carousel = ({ data, loading }) => {
           })}
         </div>
       ) : (
-        <span>loading..</span>
+       <div className="loadingSkeleton">
+        {skItem()}
+        {skItem()}
+        {skItem()}
+        {skItem()}
+        {skItem()}
+       </div>
       )}
       </ContentWrapper>
     </div>
