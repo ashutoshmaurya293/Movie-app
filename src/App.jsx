@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect } from "react";
 import { fetchApi } from "./utils/Api";
-import { getApiConfeliation } from "./Store/HomeSlice";
+import { getApiConfeliation, getGenres } from "./Store/HomeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
@@ -17,10 +17,11 @@ function App() {
   const dispath = useDispatch();
   useEffect(() => {
     fetchApiConfig();
+    genresCsll()
   }, []);
   const fetchApiConfig = () => {
     fetchApi("/configuration").then((res) => {
-      console.log(res);
+      // console.log(res);
       const url = {
         backdrop: "https://image.tmdb.org/t/p/original",
         poster: res.images.secure_base_url + "original",
@@ -28,6 +29,23 @@ function App() {
       };
       dispath(getApiConfeliation(url));
     });
+
+  };
+  const genresCsll = async () => {
+    let promises = [];
+    let endPoints = ["tv", "movie"];
+    let allGenres = {};
+    endPoints.forEach((ele) => {
+      promises.push(fetchApi(`/genre/${ele}/list`));
+    });
+    const data = await Promise.all(promises);
+    // console.log(data);
+    data.map(({genres})=>{
+      // console.log(genres);
+      return genres.map((item)=>(allGenres[item.id] = item))
+    })
+    // console.log(allGenres);
+    dispath(getGenres(allGenres))
   };
 
   return (

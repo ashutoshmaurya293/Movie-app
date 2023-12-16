@@ -12,6 +12,7 @@ import PosterFallback from "../../assets/no-poster.png";
 import "./Carousel.scss";
 import Image from "../lazyloading/Image";
 import CircleRating from "../circleRating/CircleRating";
+import Genres from "../genres/Genres";
 
 const Carousel = ({ data, loading }) => {
   const carouselConainer = useRef();
@@ -47,7 +48,7 @@ const Carousel = ({ data, loading }) => {
       {!loading ? (
         <div className="carouselItems">
           {data?.map((e) => {
-            console.log(e);
+            // console.log(e);
             const posterUrl = e.poster_path
               ? url.poster + e.poster_path
               : PosterFallback;
@@ -56,6 +57,7 @@ const Carousel = ({ data, loading }) => {
                 <div className="posterBlock">
                   <Image src={posterUrl} />
                   <CircleRating rating={e.vote_average.toFixed(1)}/>
+                  <Genres  data={e.genre_ids.slice(0, 2)}/>
                 </div>
                 <div className="textBlock">
                   <span className="title">
