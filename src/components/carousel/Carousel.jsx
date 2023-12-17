@@ -14,7 +14,7 @@ import Image from "../lazyloading/Image";
 import CircleRating from "../circleRating/CircleRating";
 import Genres from "../genres/Genres";
 
-const Carousel = ({ data, loading }) => {
+const Carousel = ({ data, loading, endPoints }) => {
   const carouselConainer = useRef();
   const { url } = useSelector((state) => state.Home);
   // console.log(url);
@@ -62,7 +62,13 @@ const Carousel = ({ data, loading }) => {
                 ? url.poster + e.poster_path
                 : PosterFallback;
               return (
-                <div className="carouselItem" key={e.id}>
+                <div
+                  className="carouselItem"
+                  key={e.id}
+                  onClick={() =>
+                    navigate(`/${e.media_type || endPoints}/${e.id}`)
+                  }
+                >
                   <div className="posterBlock">
                     <Image src={posterUrl} />
                     <CircleRating rating={e.vote_average.toFixed(1)} />
@@ -71,7 +77,9 @@ const Carousel = ({ data, loading }) => {
                   <div className="textBlock">
                     <span className="title">{e.title || e.name}</span>
                     <span className="date">
-                      {dayjs(e.first_air_date).format("MMM D, YYYY")}
+                      {dayjs(e.release_date || e.first_air_date).format(
+                        "MMM D, YYYY"
+                      )}
                     </span>
                   </div>
                 </div>
