@@ -45,7 +45,7 @@ window.scrollTo(0,0)
     if (type == "movie") {
       navigate("/explore/movie");
     } else {
-      navigate("/movie/tv");
+      navigate("/explore/tv");
     }
     setMobileMenu(false);
   };
