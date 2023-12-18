@@ -120,6 +120,22 @@ const DetailsBanner = ({ video, crew }) => {
 
                                             </div>
                                         )}
+                                           {writer?.length>0 && (
+                                            <div className="info">
+                                                <span className="text bold">
+                                                    Writer:{" "}
+                                                </span>
+                                                <span className="text">
+                                                {writer?.map((e,i)=>(
+                                                <span key={i}>
+                                                    {e.name}
+                                                    {director.length - 1 !== i && ","}
+                                                </span>
+                                            ))}
+                                                </span>
+
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </ContentWrapper>
