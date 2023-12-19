@@ -29,6 +29,7 @@ window.scrollTo(0,0)
       navigate(`/search/${query}`);
       setTimeout(() => {
         setShowSearch(false);
+        setQuery("")
       }, 1000);
     }
   };
@@ -84,7 +85,8 @@ window.scrollTo(0,0)
                 type="text"
                 placeholder="Search movies and tv shows"
                 onKeyUp={searchQuaryHandler}
-                onClick={(e) => setQuery(e.target.value)}
+                value={query}
+                onChange ={(e) => setQuery(e.target.value)}
               />
               <VscChromeClose onClick={() => setShowSearch(false)} />
             </div>

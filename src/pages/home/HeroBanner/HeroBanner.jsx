@@ -26,6 +26,10 @@ const HeroBanner = () => {
       navgate(`/search/${query}`);
     }
   };
+  const search = () =>{
+    console.log("hellow");
+    navgate(`/search/${query}`);
+  }
   return (
     <div>
       <div className="heroBanner" id="hellow">
@@ -47,9 +51,11 @@ const HeroBanner = () => {
                   type="text"
                   placeholder="Search movies and tv shows"
                   onKeyUp={searchQuaryHandler}
-                  onClick={(e) => setQuary(e.target.value)}
+                  value={query}
+                  onChange={(e)=>setQuary(e.target.value)}
+                  // onClick={(e) => setQuary(e.target.value)}
                 />
-                <button>Search</button>
+                <button onClick={search}>Search</button>
               </div>
             </div>
           </div>
