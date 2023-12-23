@@ -9,12 +9,18 @@ const Recommendation = ({ mediaType, id }) => {
     );
 
     return (
-        <Carousel
+      <>
+      {
+        data?.results.length>1 &&(
+            <Carousel
             title="Recommendations"
             data={data?.results}
             loading={loading}
             endPoints={mediaType}
         />
+        )
+      }
+      </>
     );
 };
 
